@@ -5,24 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>The Blacktop Lodge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
-  body { margin:0; padding:0 20px; font:17px/1.6 Georgia,'Times New Roman',serif;
-         color:#1a1a1a; background:#fffdf9;
-         display:flex; min-height:100vh; align-items:center; justify-content:center; }
-  @media (prefers-color-scheme: dark) { body { color:#e8e4dc; background:#171512; } }
-  main { max-width:34em; padding:4rem 0; text-align:center; }
-  h1 { font-size:1.55rem; font-weight:normal; letter-spacing:.06em;
-       text-transform:uppercase; margin:0 0 2.2rem; }
-  input { font:inherit; padding:.45em .7em; border:1px solid currentColor;
-          border-radius:2px; background:transparent; color:inherit; width:14em;
-          text-align:center; }
-  input:focus { outline:2px solid currentColor; outline-offset:2px; }
-  .err { opacity:.65; font-size:.9rem; min-height:1.4em; margin-top:.9rem; }
+  :root {
+    --obsidian:#0a0a0a; --gold:#c9a84c; --gold-dim:#8a7034;
+    --gold-glow:rgba(201,168,76,0.08); --bone:#e8e0d0; --bone-dim:#9a9286;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body {
+    background:var(--obsidian); color:var(--bone);
+    font:300 16px/1.7 'Inter',-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex; align-items:center; justify-content:center; padding:0 24px;
+  }
+  main {
+    text-align:center; animation:emerge 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes emerge {
+    from { opacity:0; transform:translateY(14px); filter:blur(2px); }
+    to   { opacity:1; transform:none; filter:none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,*::before,*::after { animation-duration:1ms !important; transition-duration:1ms !important; }
+  }
+  .sigil { width:64px; height:64px; margin:0 auto 2rem; animation:sigilPulse 3.5s ease-in-out infinite; }
+  @keyframes sigilPulse { 0%,100% { opacity:0.3; } 50% { opacity:0.8; } }
+  h1 {
+    font:400 1.6rem/1.2 'Cormorant Garamond',Georgia,serif;
+    text-transform:uppercase; letter-spacing:0.16em; color:var(--gold);
+    margin:0 0 2.4rem;
+  }
+  input {
+    font:300 1rem/1 'Inter',sans-serif; letter-spacing:0.08em;
+    padding:0.7em 1em; width:15em; text-align:center;
+    color:var(--bone); background:transparent;
+    border:1px solid var(--gold-dim); border-radius:2px;
+    transition:border-color 0.6s ease, box-shadow 0.6s ease;
+  }
+  input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 18px var(--gold-glow); }
+  input::placeholder { color:var(--bone-dim); opacity:0.55; }
+  .err {
+    color:var(--bone-dim); font:italic 300 1rem/1.5 'Cormorant Garamond',Georgia,serif;
+    min-height:1.6em; margin-top:1.3rem;
+  }
 </style>
 </head>
 <body>
 <main>
+  <svg class="sigil" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <circle cx="20" cy="20" r="18" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+    <circle cx="20" cy="20" r="12" stroke="#c9a84c" stroke-width="0.5" opacity="0.25"/>
+    <path d="M20 10 Q30 20 20 30" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="20" cy="20" r="1.5" fill="#c9a84c" opacity="0.5"/>
+  </svg>
   <h1>The Blacktop Lodge</h1>
   <form id="f">
     <input id="p" type="password" autocomplete="off" autofocus
@@ -31,13 +69,13 @@
   <p class="err" id="e"></p>
 </main>
 <script>
-const SALT="EssclJXVUsjfXcrFAQTZRA==", NONCE="xge0FKM6e4cPr7Y1", CT="d+arSkrYrgjngxC26SijvpyaLzW3V+uAfn3UTPOYBMJE9zdRrEFV56t86oue7dkCp5CMSpeXugddHOFTB5u6wt/DGZSW1SpT+ssWt+PLywuzHZ7ZykgP0E0B8kinJ3WWuJcisCj+r6RrJsLjDNDXbFpw0E6kg3/Zb56b0WiJumBQ4cC7CJfXPjntkRFk2X0eE1uFadVxCcoBiauTyFhgsKO1kODK0jCVJ1F3DI24ZrKxOUKLHQ5x9epFPSpvQLie+g3frMjx1jqQ1U8J5WZEQmj/bEfd9RIYcbU/3f/hFUViPD7E38aXXRzkA60tQPHXHMWSXVGB3/sFC+pkYshhPSEMuoZIEAzPrN+Xov6xmvmGf26k5s8zq1gRELDiZKAGDUYXMpgtj3NATreALsmrdgde/JqaZhP9TWE5VfnbUNqtp+CrN2f1QvYHjFJO7MdtQz/idqavKnnKhEmhyKImnpIA+s7EiU6fMCv3foVGArVxqyo7Hw4p6rnqFIs2hrgo2fHvOz7SuARSZwmDKd12o5wtNb3oBWzXskJVd/pf1TfP+Y5Tq/WCHdrVV/p0OFkPgFI2+vMRY5N6KRlHj/EIhNzeG5jlxQqMNJAgnrRMcjxsLhznSjuS4zVL/PFN3pheVohMHMpxaUoSe89HKLSkWSUzbWSFcLWmvfzOgtAGHhZoVSmqJHNIigicy6bF5DEe+3L7m4f+IHfpCb2mqJkPwsctA5nlzilOXWuqbdS+QDabqf5bZ3RI7+d9jMJyMPfmLgWVVdi4HR4B3q81qnCbxnd0KjfU4ka6iHURyWax4aAwR5e2pSNZ6W6zOoLh/rhGWYXLAIJEa0BLpnPjVTdGJh1fbBFp4YQU1iySChvN6GDvDTobxbC0rcbWQQ/tW5QKDJxl3a0eHrqtNb6cWyL797BEUJyUcgtNYKRduxVZl65tSOnLdLVdyUPqr+duVBwdYcol3McQ80muic8xc0AecbEawromAdhMOGiFgT+0hZBfPoz/vEj7Qz3RshrPNTLqqdG1/BDLx2kvzC/vMEIDdsS6RNuffidXwBgrppA/D0cQe7oYYTaT2oFosgaI30BfB2uH9GbkfvB4uMdmhUzW4UsDkQyuF+nUZxJsQlV1DGsuEo1xRxIhND1bRYfB156XMBdb5guEhRKzS6P7RogVeVbmkVuopWmMEZEoBNwLE2hiWElwiU2fjSVS3YCCOPgKNnKMj2gat/rDeZmXLjevR9SAZY7fzacZ1ZSvDKGEaHmpzkd01cghkg/F2fss46zLzyzKpY/8uFiALzbmA9MiTl9FbIRCGHG62wA+WQu+xJQxPjJgioqUwwcRlg2vMLNWBaMnZQxnJfQgiYUQcntvr1S6OjmeXEukm0q8zakBx/QqFwpwDlRusWK+quh6ppkkURXvCMvgCIMiII9WW7ti82Nl6sPJyX6rih7v1ZzKDR5RzdD4IMmXXRjtg+LRogynRopmIeZPnvmPPsI9ANpiqwAjo3os97vl054EZt8NlcHotEf07pSRqa/ykCv9pAFKO06mewtHmMzQhvBSlQzJNrJiVi06/tyi5VTC91+LelDiGFrHrf5M7JvNRF+b3MZOETKYs0hdq21OvqtZpl2yuljOqwWwlhE8Rq2edAaF0mwypD4h0y245+MrtwMQ3I0KtmcdVyu3RqPkDm0ILnCTHUOqKEXJGsGlLiG8Kf5Kda18+lgJuJfwIxAiM1SNtIo5l/Uyvf0tzOHy6mpJeaYSk7EEa6qtZcF8O7+Nr9nH8+fQvCdRTBs=", ITER=600000;
+const SALT="q4kenlglMYNw4f8bJsy5qA==", NONCE="u7ry4iWMwVPv1rjL", CT="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", ITER=600000;
 const un64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 document.getElementById('f').addEventListener('submit', async ev => {
   ev.preventDefault();
   if (!window.crypto || !crypto.subtle) {
     document.getElementById('e').textContent =
-      'Use the https:// address \u2014 this page can\u2019t unlock over plain http.';
+      'Use the https:// address — this page can’t unlock over plain http.';
     return;
   }
   const pw = document.getElementById('p').value;
@@ -51,7 +89,7 @@ document.getElementById('f').addEventListener('submit', async ev => {
       {name:'AES-GCM', iv:un64(NONCE)}, key, un64(CT));
     document.open(); document.write(new TextDecoder().decode(pt)); document.close();
   } catch (e) {
-    document.getElementById('e').textContent = 'That\u2019s not it.';
+    document.getElementById('e').textContent = 'That’s not it.';
     document.getElementById('p').value = '';
   }
 });
