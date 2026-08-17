@@ -3,35 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <title>The Blacktop Lodge</title>
-<meta name="description" content="Small-group driving trips built on rare access. First run: Fall 2026.">
 <style>
   :root { color-scheme: light dark; }
-  body {
-    margin: 0; padding: 0 20px;
-    font: 17px/1.6 Georgia, 'Times New Roman', serif;
-    color: #1a1a1a; background: #fffdf9;
-    display: flex; min-height: 100vh; align-items: center; justify-content: center;
-  }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e8e4dc; background: #171512; }
-  }
-  main { max-width: 34em; padding: 4rem 0; }
-  h1 {
-    font-size: 1.55rem; font-weight: normal; letter-spacing: 0.06em;
-    text-transform: uppercase; margin: 0 0 2rem;
-  }
-  p { margin: 0 0 1.2rem; }
-  .quiet { opacity: 0.6; font-size: 0.95rem; margin-top: 3rem; }
+  body { margin:0; padding:0 20px; font:17px/1.6 Georgia,'Times New Roman',serif;
+         color:#1a1a1a; background:#fffdf9;
+         display:flex; min-height:100vh; align-items:center; justify-content:center; }
+  @media (prefers-color-scheme: dark) { body { color:#e8e4dc; background:#171512; } }
+  main { max-width:34em; padding:4rem 0; text-align:center; }
+  h1 { font-size:1.55rem; font-weight:normal; letter-spacing:.06em;
+       text-transform:uppercase; margin:0 0 2.2rem; }
+  input { font:inherit; padding:.45em .7em; border:1px solid currentColor;
+          border-radius:2px; background:transparent; color:inherit; width:14em;
+          text-align:center; }
+  input:focus { outline:2px solid currentColor; outline-offset:2px; }
+  .err { opacity:.65; font-size:.9rem; min-height:1.4em; margin-top:.9rem; }
 </style>
 </head>
 <body>
 <main>
   <h1>The Blacktop Lodge</h1>
-  <p>Small-group driving trips built on rare access — the rooms, people, and places a ticket can't usually buy.</p>
-  <p>The first run: the Adirondacks, fall 2026. Your own car, three days, a dozen crews.</p>
-  <p>Trips are by application, and details travel by word of mouth.</p>
-  <p class="quiet">Applications open soon.</p>
+  <form id="f">
+    <input id="p" type="password" autocomplete="off" autofocus
+           aria-label="passphrase" placeholder="passphrase">
+  </form>
+  <p class="err" id="e"></p>
 </main>
+<script>
+const SALT="BHmhqkME3dz9OCM5c4yeDA==", NONCE="rxte8zgzgRCoBWu/", CT="5AsoMrB/rNS3mlco8OsQupuEGABdlq0W0N6wtYujKjecyHRRlDNDFi251FQiYyedpVIjD++TluX2V4wgp5I7PaDW0GJQDvbdJ+vK5ZMKkCzc0wVdbW9DfnJSvqA0zbP2E0q1DKOWRilN+wQB8fwFTs+NGbUB/PycGMw93ViRlrJ+WND/2VFXWAUlpsMFXoxNWiOwf3ikBFat1t7PQubQX7wOSLoQvgxI3FkYL4NcnFgpHYxfp+J8hqOCMaFrM3BTISz0qjppcUas0kXnmZXgeIHskGUGk0zGPOw2OMl1PMGRuC0PoylOA9FBlnI83l8uN6VGHKH7WoFmgxq13onUhKyFc3M4XBkdfKWV9JQMy3sp73RMSiIG9C+W6+ptPppX17LxI9l8n0EOo9lLpJQAEcut/2km9Z7PzO8dL1bLR9BHusDplgyPIRLcNBtxBfBC7gc2ZibHqkiME7mClNfZ7x57dRRItiNWcBCfXr++FrnrmKG9g0j+VhRJ/GrI8acApfAD+NZS9uvcM16T7GU1i+5NkIQDF8X//d2H5Ea1cEVLrvPnUI/nr0pwSIi65uK6dknhg21l198H4hgiHemqZI+c1gTR63QZPdZ6t08wnZCCOU5ndVnnR5oLtYt1UO7q3VUrVuj8ArcEG0ygwx9tO9GQbm0A3nUanhAOKj/yUtdC8f4Y2iqtKaDdBfXhGyiuvmWdF/RCS+ngWpSP/RZTfmfVQe+oVYvvXWndA9h66r4IusK+gX9X53u+K7nO9SCPYfkkat6AKYj+zfTRet/OgRJZy6mPdgS73exQQYJsSvMSMN8QuMA7v0R2tJtrPHseO/pDYcIiWy+lY1Y0eX2XLasVTCovqQ8yGWPn35PFB/ON1Ex0uVMGMaVp90OQ7JxwOUGDDSwi5g9oCIlXZ3eWc1xGd/hvsn5Y7QN485+dsDjdh/s56KMIRP+PdYuW27BOLyd1Yrqg70qnSLUZ409sII0TJZwQd0TJXVt+lfAQTSlt0fC9HtKVqFDuRw8dig45DLsiETTbg4KOK2DB6nGnYii0Ri7okpKwiLUO4U68CpzJWAZUkGSfCGW7Pg9IT7rJw4YahgTZ+Pom5JjZg4Sqc0jVOTQxkwRdTIEowEMRM6fs1C+RN/b1lDz0sg0on1roqHaMgdDP0zZWLM0KzB/p84ghqBZnSRONJRH0es77VcR9LleLDq5xC8U9C4kDBM+msq1pTitowmhKsuefAZmkwTKMUPiHov6AYNbt8Y7Y13xbBl5XSkF8at3fUR2qad2hj4yuqJBP+wc2/yH7ALAjon/HhYbt/g8OUG9qxewwiDmuC0CG6Kn67VNa3fvrojcuCvHKoeTj7bPpYtiK33x677tIbkdOgG3Da9QrX7y6bB3oT0DKc/oCYiTC9Go69lpkrlVo8cCPgnlCHSrU/gm5QmDP+3XR6act+yrV1fVPzxmZZrcMuUlSuTrbU16nQaKdced6ZdlMYP5zRTOAI8aJePeAzTCRd/tVQ/5wPL5sTmv/X97BGeTmuQ+J3xQ2V4ZmyphXzzZnej8vtCjcapz4XQaw9TRns4FQohVdC0vjQC1VBHNwyaeQhLOHo1Orx5BAwEILBTZzZy8sydH/mtKSHZc0B6T3vOhbs5nZ2FtWUR5JKOB/ae/yyklHmJRcZc5KtnRfUzRuO4kxt8gdXS3gP1w4XPuFPC/8oyaWQomhNftUd65MifCuW6eVLPxDTWIKxuOKqx6wj/GfCaFHhNRRBRt+qQD9ee5GZYOBIVCgoJe47RW0B90=", ITER=600000;
+const un64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+document.getElementById('f').addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const pw = document.getElementById('p').value;
+  try {
+    const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw),
+      'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      {name:'PBKDF2', salt:un64(SALT), iterations:ITER, hash:'SHA-256'},
+      km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+    const pt = await crypto.subtle.decrypt(
+      {name:'AES-GCM', iv:un64(NONCE)}, key, un64(CT));
+    document.open(); document.write(new TextDecoder().decode(pt)); document.close();
+  } catch (e) {
+    document.getElementById('e').textContent = 'That\u2019s not it.';
+    document.getElementById('p').value = '';
+  }
+});
+</script>
 </body>
 </html>
